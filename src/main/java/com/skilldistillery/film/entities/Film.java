@@ -3,6 +3,7 @@ package com.skilldistillery.film.entities;
 import java.util.List;
 import java.util.Objects;
 
+
 public class Film {
 	private int id;
 	private String title;

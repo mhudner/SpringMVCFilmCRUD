@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.skilldistillery.filmquery.entities.Actor;
-import com.skilldistillery.filmquery.entities.Film;
+import org.springframework.stereotype.Component;
 
+import com.skilldistillery.film.entities.Actor;
+import com.skilldistillery.film.entities.Film;
+
+@Component
 public class DatabaseAccessorObject implements DatabaseAccessor {
 	Scanner kb = new Scanner(System.in);
 	private static final String URL = "jdbc:mysql://localhost:3306/sdvid";
@@ -227,7 +230,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 	public Film createFilm(Film film) {
-		Film newFilm = null;
+		//Film newFilm = null;
 		String url = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=US/Mountain";
 		String user = "student";
 		String pword = "student";
@@ -278,4 +281,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		  }
 		  return film;
 		}
+
+	
 }
