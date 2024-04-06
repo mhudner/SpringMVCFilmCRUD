@@ -18,7 +18,7 @@ public class Actor {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-
+                       
 	@Override
 	public String toString() {
 		return " " + firstName + " " + lastName;

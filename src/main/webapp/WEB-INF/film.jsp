@@ -8,6 +8,6 @@
 
 </head>
 <body>
-	<h1>${film}</h1>
+	<h1>${film.title}</h1>
 </body>
 </html>

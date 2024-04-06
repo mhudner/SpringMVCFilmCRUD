@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.film.data.DatabaseAccessor;
 import com.skilldistillery.film.entities.Film;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class FilmController {
@@ -31,6 +33,18 @@ public class FilmController {
 		model.addAttribute("film", film);
 		return "film";
 
+	}
+
+	@RequestMapping(path = { "addFilm.do" }, method = RequestMethod.POST)
+	public ModelAndView addFilm(Film film) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("*****************************" + film);
+		dao.createFilm(film);
+		System.out.println("*****************************" + film);
+		mv.setViewName("film");
+		mv.addObject("film", film);
+
+		return mv;
 	}
 
 }
