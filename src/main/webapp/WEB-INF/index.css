@@ -1,0 +1,110 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(0, 0, 0);
+    height: 100svh;
+    display: grid;
+    place-items: center;
+}
+
+main{
+    position: absolute;
+    
+
+    
+}
+.container {
+    position: relative;
+    display: flex;
+
+    label {
+        background-color: blueviolet;
+        display: block;
+
+        input {
+            display: none;
+        }
+    }
+
+
+}
+
+.addFilmCont {
+    
+    width: 100dvw;
+    padding: 1em;
+    width: fit-content;
+
+    form {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 1em;
+
+        >div {
+            display: flex;
+            flex-flow: column;
+            gap: 1em;
+            justify-content: space-between;
+            flex: 1 1 20%;
+
+            div {
+                background-image: url(media/images/archive/fantasy-style-galaxy-background_23-2151114372.avif);
+                background-repeat: no-repeat;
+                background-attachment:fixed ;
+                background-position: center bottom;
+                background-size: cover;
+                display: flex;
+                flex-flow: column;
+                gap: .3em;
+                padding: 1em;
+                border-radius: 1rem;
+                height: 100%;
+                color: rgb(249, 249, 249);
+                
+                /* backdrop-filter: saturate(50%); */
+                
+                min-width: 150px;
+
+                background-color: rgba(240, 228, 228, 0.398);
+                backdrop-filter: blur(4px);
+
+                input,
+                option,
+                textarea, select {
+                    color: white;
+                    width: 100%;
+                    padding: .2em .5em;
+                    border-radius: .6rem;
+                    border: none;
+                    background-color: transparent;
+                    backdrop-filter: blur(2px);
+                    box-shadow: 0 0 5px 1px rgb(245, 245, 245);
+
+                }
+
+                textarea {
+                    height: 100%;
+                   
+
+                }
+                
+
+            }
+            input[type="submit"]{
+                    padding: .5em;
+                    border-radius: 1rem;
+                    border: none;
+                    background-color: hsl(227, 64%, 43%);
+                    color: white;
+
+                    &:hover{
+                        background-color: hsl(227, 64%, 60%);
+                    }
+                }
+        }
+    }
+}
