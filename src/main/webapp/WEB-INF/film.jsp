@@ -92,7 +92,7 @@ ul {
 						<p>Rental Rate: $${film.rentalRate}</p>
 						<p>Category: ${film.category}</p>
 
-						<h3>Actors</h3>
+						<h3>Cast</h3>
 						<ul>
 							<c:forEach var="actor" items="${film.actors}">
 								<li>${actor.getFistName()}  ${actor.getLastName()}</li>

@@ -120,7 +120,6 @@ main {
 						<p>Rating: ${film.rating}</p>
 						<p>Rental Rate: $${film.rentalRate}</p>
 						<p>Category: ${film.category}</p>	
-						<h3>Cast: </h3>
 			
   						<div class="accordion-item">
    							 <h2 class="accordion-header">
