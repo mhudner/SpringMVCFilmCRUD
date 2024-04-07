@@ -10,6 +10,10 @@
 </head>
 <body>
 
+<header>
+	<a href="index"> Back To Start</a>
+</header>
+
 	<form id="addFilmForm" action="updateFilm.do" method="POST">
 
 		<label>Film Id</label> <input type="text" name="id" value="${film.id}">

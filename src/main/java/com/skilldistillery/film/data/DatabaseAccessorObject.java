@@ -171,8 +171,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		System.out.println(films);
 		return films;
+
 	}
 
 	@Override

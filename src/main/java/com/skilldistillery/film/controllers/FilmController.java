@@ -80,4 +80,13 @@ public class FilmController {
 
 		return "UpdateFilm";
 	}
+
+	@RequestMapping(path = { "searchByWord" }, method = RequestMethod.GET)
+	public String updateFilm(@RequestParam("search") String search, Model mv) {
+
+		mv.addAttribute("films", dao.findFilmsByKeyword(search));
+
+		return "films";
+	}
+
 }
