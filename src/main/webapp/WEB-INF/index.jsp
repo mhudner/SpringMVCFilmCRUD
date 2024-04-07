@@ -21,8 +21,8 @@ main {
 }
 
 .hideOptions {
-	display: none; 
-	&:has(input:checked){  
+	display: none; &:
+	has (input: checked){        
 	 	display: block;
 }
 
@@ -32,12 +32,9 @@ input[name="options"] {
 
 }
 .selections {
-	display:flex;
+	display: flex;
 	flex-flow: column;
-	gap: 1em;
-
-	label { 
-	background-color:grey;
+	gap: 1em; label { background-color : grey;
 	padding: 1em;
 	border-radius: 1rem;
 }
@@ -51,16 +48,20 @@ input[name="options"] {
 	<main>
 
 		<div class="selections">
-			<label for="option1">Search Film By ID</label> <label for="option2">Search
-				films by keyword</label> <label for="option3">Add a film</label>
+			<label for="option1">Search Film By ID</label>
+			<label for="option2">Search films by keyword</label>
+			<label for="option3">Add a film</label>
 		</div>
 		<div class=hideOptions>
 			<input type="radio" name="options" id="option1">
 
 			<form id="searchFilm" action="find.do">
 
-				<label>Film id: <input type="text" name="id"></label> <input
-					type="submit" value="Search" form="searchFilm">
+				<label>
+					Film id:
+					<input type="text" name="id">
+				</label>
+				<input type="submit" value="Search" form="searchFilm">
 			</form>
 
 		</div>
@@ -72,7 +73,10 @@ input[name="options"] {
 			<input type="radio" name="options" id="option2">
 
 			<form action="searchByWord">
-				<label>Search By Keyword <input type="text" name="search"></label>
+				<label>
+					Search By Keyword
+					<input type="text" name="search">
+				</label>
 				<input type="submit" value="Search">
 			</form>
 		</div>
@@ -84,24 +88,44 @@ input[name="options"] {
 
 					<h1>Add A Film</h1>
 
-					<label>Title </label> <input type="text" name="title" required />
-					<br> <label>Description</label> <input type="text"
-						name="description" /> <br> <label for="addMovieYear">Release
-						Year</label> <input type="text" name="releaseYear" placeholder="YYYY"
-						value="2001" /> <br> <select name="language"
-						id="addFilmLanguage">
+					<label>Title </label>
+					<input type="text" name="title" required />
+					<br>
+					<label>Description</label>
+					<input type="text" name="description" />
+					<br>
+					<label for="addMovieYear">Release Year</label>
+					<input type="text" name="releaseYear" placeholder="YYYY"
+						value="2001" />
+						
+					<label>Language</label>
+					<select name="language">
 						<option value="1" selected>English</option>
 						<option value="2">Italian</option>
 						<option value="3">Japanese</option>
 						<option value="4">Mandarin</option>
 						<option value="5">French</option>
 						<option value="6">German</option>
-					</select> <br> <label>Length</label> <input type="text" name="length" />
-					<br> <label>Replacement Cost </label> <input type="text"
-						name="replacementCost" /> <br> <label>Rating</label> <input
-						type="text" name="rating" /> <br> <label>Rental Rate
-					</label> <input type="text" name="rentalRate" /> <br> <input
-						type="submit" value="submit" />
+					</select>
+					<label>Length</label>
+					<input type="text" name="length" />
+
+					<label>Replacement Cost </label>
+					<input type="text" name="replacementCost" />
+
+					<label>Rating</label>
+					<select name="rating">
+						<option value="G" selected>G</option>
+						<option value="PG">PG</option>
+						<option value="PG13">PG13</option>
+						<option value="R">R</option>
+						<option value="NC17">NC17</option>
+					</select>
+					<!-- <input  type="text" name="rating"/> -->
+					
+					<label>Rental Rate </label>
+					<input type="text" name="rentalRate" />
+					<input type="submit" value="submit" />
 				</form>
 			</div>
 		</div>

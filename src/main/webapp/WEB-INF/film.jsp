@@ -65,9 +65,10 @@ main {
 
 			<a href="index"> Back To Start</a>
 		
+<c:if test="${film != null}">
 
 
-		<c:choose>
+<c:choose>
 
 			<c:when test="${film.id > 1000}">
 				<div class="card canDelete">
@@ -116,6 +117,13 @@ main {
 				</div>
 			</c:otherwise>
 		</c:choose>
+</c:if>
+
+<c:if test="${film == null}">
+  
+  <h1>Cannot find, please try again.</h1>
+</c:if>
+		
 	</main>
 </body>
 </html>
