@@ -6,9 +6,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<style type="text/css">
+
+body{
+background-color: blue;
+}
+
+</style>
+
 </head>
 <body>
 	<h1>${film.title}</h1>
+	<p>${film.description}</p>
 	
 	<form action="delete" method="POST">
     	<input name="id" disabled="disabled" type = "text" value = "${film.id}" />

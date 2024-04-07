@@ -2,17 +2,20 @@
 	pageEncoding="UTF-8"%>
 	
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-	background-color: blue; 
-	.ick {color: blue}
-</style>
 <meta charset="UTF-8">
 <title>Home</title>
-<!-- <link rel="stylesheet" href="index.css">
- --></head>
+
+
+
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/index.css" />">
+
+
+
+</head>
 <body class="ick">
 
 
