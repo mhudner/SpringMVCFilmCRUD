@@ -11,12 +11,11 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-*{
-	padding:0;
-	margin:0;
+* {
+	padding: 0;
+	margin: 0;
 	box-sizing: border-box;
 }
-
 
 body {
 	background-color: pink;
@@ -28,7 +27,7 @@ body {
 
 main {
 	height: 100svh;
-	width: 100%; 
+	width: 100%;
 	display: flex;
 	flex-flow: column;
 	background-color: green;
@@ -45,13 +44,22 @@ main {
 	text-align: center;
 	padding: .5em;
 	max-width: 250px;
-	
+	li
+	{
+	list-style
+	:
+	none;
 }
 
+}
+}
 .canDelete {
 	background-color: red;
 }
-</style>
+
+ul {
+	
+}
 </style>
 
 </head>
@@ -63,67 +71,94 @@ main {
 	<main>
 
 
-			<a href="index"> Back To Start</a>
-		
-<c:if test="${film != null}">
 
 
-<c:choose>
+		<a href="index"> Back To Start</a>
 
-			<c:when test="${film.id > 1000}">
-				<div class="card canDelete">
-
-					<h1>${film.title}</h1>
-					<p>${film.description}</p>
-					<p>${film.releaseYear}</p>
-					<p>${film.length}</p>
-					<p>${film.replacementCost}</p>
-					<p>${film.rating}</p>
-					<p>${film.rentalRate}</p>
-
-					<form action="delete" method="POST">
-						<input class="hidden" name="id" readonly="readonly" type="text"
-							value="${film.id}" /> <input type="submit" value="delete">
-					</form>
-
-					<form action="editFilm" method="POST">
-						<input class="hidden" name="id" readonly="readonly" type="text"
-							value="${film.id}" /> <input type="submit" value="edit">
-					</form>
-				</div>
-			</c:when>
-
-			<c:otherwise>
-				<div class="card">
-					<h1>${film.title}</h1>
-					<p>${film.description}</p>
-					<p>${film.releaseYear}</p>
-					<p>${film.length}</p>
-					<p>${film.replacementCost}</p>
-					<p>${film.rating}</p>
-					<p>${film.rentalRate}</p>
+		<c:if test="${film != null}">
 
 
-					<form action="delete" method="POST">
-						<input class="hidden" name="id" readonly="readonly" type="text"
-							value="${film.id}" /> <input type="submit" value="delete">
-					</form>
+			<c:choose>
 
-					<form action="editFilm" method="POST">
-						<input class="hidden" name="id" readonly="readonly" type="text"
-							value="${film.id}" /> <input type="submit" value="edit">
-					</form>
+				<c:when test="${film.id > 1000}">
+					<div class="card canDelete">
 
-				</div>
-			</c:otherwise>
-		</c:choose>
-</c:if>
+						<h1>${film.title}</h1>
+						<p>Description: ${film.description}</p>
+						<p>Release Year: ${film.releaseYear}</p>
+						<p>Length: ${film.length}</p>
+						<p>Replacement Cost: $${film.replacementCost}</p>
+						<p>Rating: ${film.rating}</p>
+						<p>Rental Rate: $${film.rentalRate}</p>
+						<p>Category: ${film.category}</p>
 
-<c:if test="${film == null}">
-  
-  <h1>Cannot find, please try again.</h1>
-</c:if>
-		
+						<h3>Actors</h3>
+						<ul>
+							<c:forEach var="actor" items="${film.actors}">
+								<li>${actor.getFistName()}  ${actor.getLastName()}</li>
+							</c:forEach>
+						</ul>
+
+
+
+
+
+						<form action="delete" method="POST">
+							<input class="hidden" name="id" readonly="readonly" type="text"
+								value="${film.id}" /> <input type="submit" value="delete">
+						</form>
+
+						<form action="editFilm" method="POST">
+							<input class="hidden" name="id" readonly="readonly" type="text"
+								value="${film.id}" /> <input type="submit" value="edit">
+						</form>
+					</div>
+				</c:when>
+
+				<c:otherwise>
+					<div class="card">
+						<h1>${film.title}</h1>
+						<p>Description: ${film.description}</p>
+						<p>Release Year: ${film.releaseYear}</p>
+						<p>Length: ${film.length}</p>
+						<p>Replacement Cost: $${film.replacementCost}</p>
+						<p>Rating: ${film.rating}</p>
+						<p>Rental Rate: $${film.rentalRate}</p>
+						<p>Category: ${film.category}</p>
+
+						<%-- 			<c:if test="${films.actors != null || !films.actors.isEmpty()}">
+ --%>
+						<br>
+						<h3>Cast</h3>
+						<ul>
+							<c:forEach var="actor" items="${film.actors}">
+								<li>${actor.getFirstName()}  ${actor.getLastName()}</li>
+							</c:forEach>
+						</ul>
+
+						<%-- 			</c:if>
+ --%>
+
+						<form action="delete" method="POST">
+							<input class="hidden" name="id" readonly="readonly" type="text"
+								value="${film.id}" /> <input type="submit" value="delete">
+						</form>
+
+						<form action="editFilm" method="POST">
+							<input class="hidden" name="id" readonly="readonly" type="text"
+								value="${film.id}" /> <input type="submit" value="edit">
+						</form>
+
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</c:if>
+
+		<c:if test="${film == null}">
+
+			<h1>Cannot find, please try again.</h1>
+		</c:if>
+
 	</main>
 </body>
 </html>

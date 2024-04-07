@@ -18,6 +18,7 @@ public class Film {
 	private String specialFeatures;
 	private List<Actor> actors;
 	private String filmLanguage;
+	private String category;
 
 	public Film() {
 
@@ -187,10 +188,23 @@ public class Film {
 	public void setFilmLanguage(String filmLanguage) {
 		this.filmLanguage = filmLanguage;
 	}
+	
+	
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	
+	
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(actors, description, filmLanguage, id, languageId, length, rating, releaseYear,
+		return Objects.hash(actors, category, description, filmLanguage, id, languageId, length, rating, releaseYear,
 				rentalDuration, rentalRate, replacementCost, specialFeatures, title);
 	}
 
@@ -203,10 +217,11 @@ public class Film {
 		if (getClass() != obj.getClass())
 			return false;
 		Film other = (Film) obj;
-		return Objects.equals(actors, other.actors) && Objects.equals(description, other.description)
-				&& Objects.equals(filmLanguage, other.filmLanguage) && id == other.id && languageId == other.languageId
-				&& Objects.equals(length, other.length) && Objects.equals(rating, other.rating)
-				&& Objects.equals(releaseYear, other.releaseYear) && rentalDuration == other.rentalDuration
+		return Objects.equals(actors, other.actors) && Objects.equals(category, other.category)
+				&& Objects.equals(description, other.description) && Objects.equals(filmLanguage, other.filmLanguage)
+				&& id == other.id && languageId == other.languageId && Objects.equals(length, other.length)
+				&& Objects.equals(rating, other.rating) && Objects.equals(releaseYear, other.releaseYear)
+				&& rentalDuration == other.rentalDuration
 				&& Double.doubleToLongBits(rentalRate) == Double.doubleToLongBits(other.rentalRate)
 				&& Double.doubleToLongBits(replacementCost) == Double.doubleToLongBits(other.replacementCost)
 				&& Objects.equals(specialFeatures, other.specialFeatures) && Objects.equals(title, other.title);
@@ -216,7 +231,7 @@ public class Film {
 	public String toString() {
 		return "Film id:" + id + "\nTitle: " + title + "\nDescription: " + description + "\nRelease Year: " + releaseYear
 				+ "\nLanguage Id: " + languageId + "\nRental Duration: " + rentalDuration + "\nRental Rate: " + rentalRate
-				+ "\nLength: " + length + "\nReplacement Cost: " + replacementCost + "\nRating: " + rating;
+				+ "\nLength: " + length + "\nReplacement Cost: " + replacementCost + "\nRating: " + rating + "\nFilm Category: " + category;
 	}
 
 

@@ -26,10 +26,14 @@ public class FilmController {
 	}
 
 	@RequestMapping(path = { "find.do" }, method = RequestMethod.GET)
-	public String findFilmById(@RequestParam("id") int id, Model model) {
+	public ModelAndView findFilmById(@RequestParam("id") int id) {
+		ModelAndView mv = new ModelAndView();
+		
 		Film film = dao.findFilmById(id);
-		model.addAttribute("film", film);
-		return "film";
+		mv.addObject("film" ,film);
+		mv.addObject("actors" ,film.getActors());
+		mv.setViewName("film");
+		return mv;
 
 	}
 
@@ -39,8 +43,19 @@ public class FilmController {
 		System.out.println("*****************************" + film);
 		dao.createFilm(film);
 		System.out.println("*****************************" + film);
-		mv.setViewName("film");
+		
+		/*
+		if(film == null){
+			Boolean fail = true;
+			mv.addObject("addFailed", fail);
+			mv.setViewName("index");
+	
+		} else{
+			
+		}
+		*/
 		mv.addObject("film", film);
+		mv.setViewName("film");
 
 		return mv;
 	}
@@ -85,7 +100,8 @@ public class FilmController {
 	public String updateFilm(@RequestParam("search") String search, Model mv) {
 
 		mv.addAttribute("films", dao.findFilmsByKeyword(search));
-
+		
+		
 		return "films";
 	}
 

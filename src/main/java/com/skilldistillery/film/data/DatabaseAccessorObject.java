@@ -60,14 +60,20 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				String specialFeatures = idResult.getString("special_features");
 				String filmLanguage = idResult.getString("name");
 
-				// int filmId, String title, String description, int releaseYear,
-				// int languageId, int rentalDuration,
-				// double rentalRate, double lengthOfFilm, double replacementCost, String
-				// rating, String specialFeatures,
-				// String filmLanguage
-
 				film = new Film(filmId, title, description, releaseYear, languageId, rentalDuration, rentalRate, length,
 						replacementCost, rating, specialFeatures, filmLanguage);
+
+				System.out.println("***** ln 68 " + film);
+
+				film.setActors(findActorsByFilmId(filmId));
+				film.setCategory(findCategory(filmId));
+				
+
+				System.out.println("***** ln73 " + film);
+
+				System.out.println(film.getActors());
+				System.out.println(film.getCategory());
+
 				// System.out.println("**************************************************************"
 				// + film);
 
@@ -77,7 +83,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		} 
+		
 		return film;
 
 	}
@@ -118,7 +125,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		} 
 		return actors;
 
 	}
@@ -160,8 +167,19 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				Film film = new Film(filmId, title, description, releaseYear, languageId, rentalDuration, rentalRate,
 						length, replacementCost, rating, specialFeatures, filmLanguage);
 
+				
+				
+				
+				film.setActors(findActorsByFilmId(filmId));
+				film.setCategory(findCategory(filmId));
+
+				System.out.println("***** ln172  ************************\n" + film.getTitle());
+
+				System.out.println(film.getActors());
+				System.out.println(film.getCategory());
+				
+				
 				films.add(film);
-				// System.out.println(film);
 			}
 
 			rs.close();
@@ -171,7 +189,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(films);
+		
 		return films;
 
 	}
@@ -264,11 +282,16 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			if (conn != null) {
 				try {
 					conn.rollback();
-				} catch (SQLException sqle2) {
 					System.err.println("Error trying to rollback");
+					return null;
+				} catch (SQLException sqle2) {
+					
 				}
 			}
 			throw new RuntimeException("Error inserting film " + film);
+		} catch(Exception e) {
+			System.out.println("It reached here");
+			
 		}
 		return film;
 	}
@@ -345,24 +368,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			int updateCount = stmt.executeUpdate();
 
 			System.out.println(updateCount);
-//			if (updateCount == 1) {
-			// Replace actor's film list
-//		      sql = "DELETE FROM film WHERE film.id = ?";
-//		      stmt = conn.prepareStatement(sql);
-//		      stmt.setInt(1, film.getId());
-//				updateCount = stmt.executeUpdate();
-//		      sql = "INSERT INTO film(title, description, release_year, language_id, rental_duration, "
-//		      		+ "rental_rate, length, replacement_cost, rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-//		      		 stmt = conn.prepareStatement(sql);
-//		      for (Film film : film.getFilms()) {
-//		        stmt.setInt(1, film.getId());
-//		        stmt.setInt(2, film.getId());
-//		        updateCount = stmt.executeUpdate();
-//		      }
 
 			System.out.println("Its about to commit");
 			conn.commit(); // COMMIT TRANSACTION
-//			}
+
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
@@ -379,13 +388,31 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return true;
 	}
 
-//					if (film.getActors() != null && film.getActors().size() > 0) {
-//						sql = "INSERT INTO film_actor (film_id, actor_id) VALUES (?,?)";
-//						stmt = conn.prepareStatement(sql);
-//						for (Actor actor : film.getActors()) {
-//							stmt.setString(1, film.getTitle());
-//							stmt.setString(2, film.getDescription());
-//							uc = stmt.executeUpdate();
-//						}
-//					}
-}
+	public String findCategory(int filmId) {
+		String url = "jdbc:mysql://localhost:3306/sdvid";
+		String user = "student";
+		String pword = "student";
+
+		String category = "No category available";
+			  try { 
+			Connection conn = DriverManager.getConnection(url, user, pword); 
+			String sql = "Select category.name FROM category "
+					+ "JOIN film_category ON category.id = film_category.category_id "
+					+ "JOIN film ON film_category.film_id = film.id "
+					+ "WHERE film.id = ?";
+			  PreparedStatement stmt = conn.prepareStatement(sql); 
+			  stmt.setInt(1, filmId);
+			  ResultSet result = stmt.executeQuery(); 
+			  while (result.next()) { 
+				  category = result.getString("category.name");	  
+			  } 
+			  result.close(); 
+			  stmt.close(); 
+			  conn.close();
+			  } 
+			  catch (SQLException e) { e.printStackTrace(); }
+			 
+			return category;
+		}
+	}
+
