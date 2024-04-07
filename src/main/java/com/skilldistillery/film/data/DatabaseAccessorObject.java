@@ -44,20 +44,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.setInt(1, filmId);
 			// System.out.println(stmt);
 
-//SELECT category.*, film.*,language.* 
-//FROM category 
-//OIN film_category ON category.id = film_category.film_id 
-//JOIN film ON film.id = film_category.film_id 
-//JOIN language ON language.id = film.id
-//WHERE film.id = ?;
-
-//			title, year, rating, description, language, list of actors
-
-//			|---------------------|
-//			| 1 View full details |
-//			| 2 return to menu    |
-//          |---------------------|
-
 			ResultSet idResult = stmt.executeQuery();
 			// System.out.println(idResult);
 			if (idResult.next()) {
@@ -286,7 +272,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 	public boolean deleteFilm(Film film) {
 		// Film newFilm = null;
-		String url = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=US/Mountain";
+		String url = "jdbc:mysql://localhost:3306/sdvid";
 		String user = "student";
 		String pword = "student";
 
@@ -313,30 +299,35 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					System.err.println("Error trying to rollback");
 				}
 			}
+			System.out.println("************************************************" + false);
 			return false;
 		}
+		System.out.println("************************************************" + true);
 		return true;
 	}
 
 	public boolean updateFilm(Film film) {
 		
-		String url = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=US/Mountain";
+		String url = "jdbc:mysql://localhost:3306/sdvid";
 		String user = "student";
 		String pword = "student";
+		
+		System.out.println(film + "*************");
 		
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url, user, pword);
 			conn.setAutoCommit(false); // START TRANSACTION
-			String sql = "UPDATE film SET film (title, description, release_year, language_id"
-					+ "rental_duration, rental_rate, length, replacement_cost, rating, special_features) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+			String sql = "UPDATE film SET film (title, description, release_year, language_id, rental_duration, "
+					+ " rental_rate, length, replacement_cost, rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
 					+ " WHERE id=?";
 
 //		    int id, String title, String description, int releaseYear, int languageId, int rentalDuration,
 //			double rentalRate, double lengthOfFilm, double replacementCost, String rating, String specialFeatures,
 //			String filmLanguage
 
-			PreparedStatement stmt = conn.prepareStatement(sql);
+					
+			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, film.getTitle());
 			stmt.setString(2, film.getDescription());
 			stmt.setInt(3, film.getReleaseYear());
@@ -346,23 +337,29 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			stmt.setInt(7, film.getLength());
 			stmt.setDouble(8, film.getReplacementCost());
 			stmt.setString(9, film.getRating());
-			stmt.setString(10, film.getSpecialFeatures());
+			stmt.setInt(10, film.getId());
+			
+//			System.out.println(stmt+"*********************");
+			
 			int updateCount = stmt.executeUpdate();
-			if (updateCount == 1) {
+//			if (updateCount == 1) {
 				// Replace actor's film list
-//		      sql = "DELETE FROM film_actor WHERE actor_id = ?";
+//		      sql = "DELETE FROM film WHERE film.id = ?";
 //		      stmt = conn.prepareStatement(sql);
 //		      stmt.setInt(1, film.getId());
-// updateCount = stmt.executeUpdate();
-//		      sql = "INSERT INTO film_actor (film_id, actor_id) VALUES (?,?)";
-//		      stmt = conn.prepareStatement(sql);
+//				updateCount = stmt.executeUpdate();
+//		      sql = "INSERT INTO film(title, description, release_year, language_id, rental_duration, "
+//		      		+ "rental_rate, length, replacement_cost, rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+//		      		 stmt = conn.prepareStatement(sql);
 //		      for (Film film : film.getFilms()) {
 //		        stmt.setInt(1, film.getId());
 //		        stmt.setInt(2, film.getId());
 //		        updateCount = stmt.executeUpdate();
 //		      }
+
+				System.out.println("Its about to commit");
 				conn.commit(); // COMMIT TRANSACTION
-			}
+//			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {

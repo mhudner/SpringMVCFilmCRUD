@@ -46,5 +46,43 @@ public class FilmController {
 
 		return mv;
 	}
+	
+	@RequestMapping(path = { "delete" }, method = RequestMethod.POST)
+	public ModelAndView deleteFilm(@RequestParam("id") int id) {
+		
+		
+		ModelAndView mv = new ModelAndView();
+		Film film = dao.findFilmById(id);
+		System.out.println("*****************************" + film);
+		
+		
+		boolean deleted = dao.deleteFilm(film);
+		
+		mv.setViewName("delete");
+		mv.addObject("delete", deleted);
+		
+		return mv;
+	}
+	
+	@RequestMapping(path = {"updateFilm.do"}, method = RequestMethod.POST)
+	public ModelAndView editFilm(Film film) {
 
+		ModelAndView mv = new ModelAndView();
+		System.out.println("*****************************" + film);
+		dao.updateFilm(film);
+		System.out.println("*****************************" + film);
+		mv.setViewName("film");
+		mv.addObject("film", film);
+		
+		return mv;
+	}
+
+	@RequestMapping(path = {"editFilm"}, method = RequestMethod.POST)
+	public String updateFilm(@RequestParam("id") int id, Model mv) {
+
+		
+		mv.addAttribute("film", dao.findFilmById(id));
+
+		return "UpdateFilm";
+	}
 }

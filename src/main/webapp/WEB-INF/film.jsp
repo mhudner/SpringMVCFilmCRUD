@@ -9,5 +9,13 @@
 </head>
 <body>
 	<h1>${film.title}</h1>
-</body>
-</html>
+	
+	<form action="delete" method="POST">
+    	<input name="id" disabled="disabled" type = "text" value = "${film.id}" />
+       <input type="submit" value="delete">
+	</form>>
+	
+	<form action="editFilm" method="POST">
+    	<input name="id" type = "text" value = "${film.id}" />
+       <input type="submit" value="edit">
+	</form>>
