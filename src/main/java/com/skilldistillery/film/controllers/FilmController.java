@@ -10,8 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.film.data.DatabaseAccessor;
 import com.skilldistillery.film.entities.Film;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class FilmController {
@@ -46,41 +44,38 @@ public class FilmController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping(path = { "delete" }, method = RequestMethod.POST)
 	public ModelAndView deleteFilm(@RequestParam("id") int id) {
-		
-		
+
 		ModelAndView mv = new ModelAndView();
 		Film film = dao.findFilmById(id);
 		System.out.println("*****************************" + film);
-		
-		
+
 		boolean deleted = dao.deleteFilm(film);
-		
+
 		mv.setViewName("delete");
 		mv.addObject("delete", deleted);
-		
+
 		return mv;
 	}
-	
-	@RequestMapping(path = {"updateFilm.do"}, method = RequestMethod.POST)
+
+	@RequestMapping(path = { "updateFilm.do" }, method = RequestMethod.POST)
 	public ModelAndView editFilm(Film film) {
 
 		ModelAndView mv = new ModelAndView();
-		System.out.println("*****************************" + film);
+//		System.out.println("*****************************" + film + "ln 71");
 		dao.updateFilm(film);
-		System.out.println("*****************************" + film);
+		System.out.println("*****************************" + film + "ln 73");
 		mv.setViewName("film");
 		mv.addObject("film", film);
-		
+
 		return mv;
 	}
 
-	@RequestMapping(path = {"editFilm"}, method = RequestMethod.POST)
+	@RequestMapping(path = { "editFilm" }, method = RequestMethod.POST)
 	public String updateFilm(@RequestParam("id") int id, Model mv) {
 
-		
 		mv.addAttribute("film", dao.findFilmById(id));
 
 		return "UpdateFilm";
