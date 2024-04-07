@@ -21,23 +21,26 @@ main {
 }
 
 .hideOptions {
-	display: none; &:
-	has (input: checked){        
+	display: none; 
+	&:has(input:checked){               
 	 	display: block;
-}
+	}
 
-input[name="options"] {
-	display: none;
-}
+	input[name="options"] {
+		display: none;
+	}
 
 }
 .selections {
 	display: flex;
 	flex-flow: column;
-	gap: 1em; label { background-color : grey;
-	padding: 1em;
-	border-radius: 1rem;
-}
+	gap: 1em; 
+	
+	label{
+		background-color: grey;
+		padding: 1em;
+		border-radius: 1rem;
+	}
 }
 </style>
 
@@ -97,7 +100,7 @@ input[name="options"] {
 					<label for="addMovieYear">Release Year</label>
 					<input type="text" name="releaseYear" placeholder="YYYY"
 						value="2001" />
-						
+
 					<label>Language</label>
 					<select name="language">
 						<option value="1" selected>English</option>
@@ -122,7 +125,7 @@ input[name="options"] {
 						<option value="NC17">NC17</option>
 					</select>
 					<!-- <input  type="text" name="rating"/> -->
-					
+
 					<label>Rental Rate </label>
 					<input type="text" name="rentalRate" />
 					<input type="submit" value="submit" />
