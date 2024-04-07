@@ -9,7 +9,7 @@
 <style type="text/css">
 
 body{
-background-color: blue;
+background-color: pink;
 }
 
 </style>
@@ -18,9 +18,14 @@ background-color: blue;
 <body>
 	<h1>${film.title}</h1>
 	<p>${film.description}</p>
+	<p>${film.releaseYear}</p>
+	<p>${film.length}</p>
+	<p>${film.replacementCost}</p>
+	<p>${film.rating}</p>
+	<p>${film.rentalRate}</p>
 	
 	<form action="delete" method="POST">
-    	<input name="id" disabled="disabled" type = "text" value = "${film.id}" />
+    	<input name="id" readonly="readonly" type = "text" value = "${film.id}" />
        <input type="submit" value="delete">
 	</form>>
 	
