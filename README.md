@@ -18,6 +18,8 @@ Technologies used:
 - Zsh
 - csv
 - Database
+- Zoom
+- Slack
 
 
 Lessons learned
@@ -42,3 +44,6 @@ Lessons learned
 - How to add, edit or delete information to the database
 
 - How to use object relational mapping to convert our data
+
+- How to work with a partner to make a complete application through pair programming
+
