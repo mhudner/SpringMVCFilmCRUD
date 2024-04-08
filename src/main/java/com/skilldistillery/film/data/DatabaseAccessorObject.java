@@ -67,7 +67,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 				film.setActors(findActorsByFilmId(filmId));
 				film.setCategory(findCategory(filmId));
-				
 
 				System.out.println("***** ln73 " + film);
 
@@ -83,8 +82,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
-		
+		}
+
 		return film;
 
 	}
@@ -125,7 +124,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return actors;
 
 	}
@@ -167,9 +166,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				Film film = new Film(filmId, title, description, releaseYear, languageId, rentalDuration, rentalRate,
 						length, replacementCost, rating, specialFeatures, filmLanguage);
 
-				
-				
-				
 				film.setActors(findActorsByFilmId(filmId));
 				film.setCategory(findCategory(filmId));
 
@@ -177,8 +173,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 				System.out.println(film.getActors());
 				System.out.println(film.getCategory());
-				
-				
+
 				films.add(film);
 			}
 
@@ -189,7 +184,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return films;
 
 	}
@@ -285,13 +280,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					System.err.println("Error trying to rollback");
 					return null;
 				} catch (SQLException sqle2) {
-					
+					System.out.println("fdsfd");
 				}
 			}
 			throw new RuntimeException("Error inserting film " + film);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("It reached here");
-			
+
 		}
 		return film;
 	}
@@ -385,6 +380,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			}
 			return false;
 		}
+		System.out.println("it committed");
 		return true;
 	}
 
@@ -394,25 +390,24 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		String pword = "student";
 
 		String category = "No category available";
-			  try { 
-			Connection conn = DriverManager.getConnection(url, user, pword); 
+		try {
+			Connection conn = DriverManager.getConnection(url, user, pword);
 			String sql = "Select category.name FROM category "
 					+ "JOIN film_category ON category.id = film_category.category_id "
-					+ "JOIN film ON film_category.film_id = film.id "
-					+ "WHERE film.id = ?";
-			  PreparedStatement stmt = conn.prepareStatement(sql); 
-			  stmt.setInt(1, filmId);
-			  ResultSet result = stmt.executeQuery(); 
-			  while (result.next()) { 
-				  category = result.getString("category.name");	  
-			  } 
-			  result.close(); 
-			  stmt.close(); 
-			  conn.close();
-			  } 
-			  catch (SQLException e) { e.printStackTrace(); }
-			 
-			return category;
+					+ "JOIN film ON film_category.film_id = film.id " + "WHERE film.id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet result = stmt.executeQuery();
+			while (result.next()) {
+				category = result.getString("category.name");
+			}
+			result.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-	}
 
+		return category;
+	}
+}
